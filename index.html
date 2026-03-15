@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final – Consultoría en Sexualidad</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #faf8f5;
+  --card: #ffffff;
+  --border: #e8e0d5;
+  --accent: #8b5e3c;
+  --accent2: #c4956a;
+  --accent3: #6b8e7f;
+  --accent4: #7c5c8a;
+  --text: #2d2418;
+  --muted: #8a7968;
+  --soft: #f0ebe3;
+  --red: #b85450;
+  --green: #4a7c6a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* HEADER */
+header {
+  background: var(--text);
+  color: #faf8f5;
+  padding: 28px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.logo-sub {
+  font-size: 0.75rem;
+  color: var(--accent2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.progress-area {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.prog-label {
+  font-size: 0.8rem;
+  color: #c4b8a8;
+}
+
+.prog-track {
+  width: 160px;
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.prog-fill {
+  height: 100%;
+  background: var(--accent2);
+  border-radius: 99px;
+  transition: width 0.6s ease;
+  width: 0%;
+}
+
+/* LAYOUT */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 80px);
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  padding: 28px 0;
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+.sb-section {
+  padding: 0 20px 8px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 20px;
+}
+
+.sb-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  padding: 9px 20px;
+  cursor: pointer;
+  text-align: left;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.sb-btn:hover { background: var(--soft); color: var(--accent); }
+.sb-btn.active { background: var(--soft); color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+.sb-btn.done { color: var(--green); }
+.sb-btn.done::after { content: ' ✓'; font-size: 0.8rem; margin-left: auto; }
+
+.sb-num {
+  width: 22px; height: 22px;
+  background: var(--soft);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.sb-btn.active .sb-num { background: var(--accent); color: white; }
+
+/* MAIN */
+.main {
+  flex: 1;
+  padding: 40px 52px;
+  max-width: 860px;
+}
+
+/* SECTION */
+.section { display: none; }
+.section.active { display: block; }
+
+/* PAGE TITLE */
+.page-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(139,94,60,0.1);
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 12px;
+}
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.page-intro {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 36px;
+  border-left: 3px solid var(--accent2);
+  padding-left: 16px;
+  max-width: 620px;
+}
+
+/* SECTION HEADING */
+.sh {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 32px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sh::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* RESPUESTA CARD */
+.resp-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.resp-card .pregunta {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.resp-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.resp-card .respuesta {
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
+/* TEORIA BOX */
+.teoria-box {
+  background: rgba(139,94,60,0.06);
+  border: 1px solid rgba(139,94,60,0.18);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-top: 4px;
+}
+
+.teoria-box .tbox-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.teoria-box ul {
+  padding-left: 18px;
+}
+
+.teoria-box li, .teoria-box p {
+  font-size: 0.86rem;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+.teoria-box li strong, .teoria-box p strong {
+  color: var(--text);
+}
+
+/* CITA */
+.cita {
+  background: var(--soft);
+  border-left: 4px solid var(--accent2);
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 12px 0;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* CHIPS */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chip {
+  font-size: 0.76rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 99px;
+  border: 1px solid;
+}
+
+.chip.brown { color: var(--accent); border-color: rgba(139,94,60,0.35); background: rgba(139,94,60,0.08); }
+.chip.teal { color: var(--accent3); border-color: rgba(107,142,127,0.35); background: rgba(107,142,127,0.08); }
+.chip.purple { color: var(--accent4); border-color: rgba(124,92,138,0.35); background: rgba(124,92,138,0.08); }
+.chip.red { color: var(--red); border-color: rgba(184,84,80,0.35); background: rgba(184,84,80,0.08); }
+.chip.green { color: var(--green); border-color: rgba(74,124,106,0.35); background: rgba(74,124,106,0.08); }
+
+/* FLASHCARD */
+.fc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.fc-wrap {
+  perspective: 900px;
+  cursor: pointer;
+  min-height: 130px;
+}
+
+.fc {
+  position: relative;
+  width: 100%;
+  min-height: 130px;
+  transform-style: preserve-3d;
+  transition: transform 0.45s;
+}
+
+.fc.flipped { transform: rotateY(180deg); }
+
+.fc-face {
+  position: absolute;
+  width: 100%; min-height: 130px;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 18px;
+}
+
+.fc-front {
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.fc-back {
+  background: var(--soft);
+  border: 1px solid rgba(139,94,60,0.25);
+  transform: rotateY(180deg);
+}
+
+.fc-front .fc-q {
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.fc-front .fc-hint {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.fc-back .fc-a {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.fc-back .fc-src {
+  font-size: 0.72rem;
+  color: var(--accent);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* TABLE */
+.study-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+  font-size: 0.88rem;
+}
+
+.study-table thead th {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  background: var(--soft);
+  color: var(--accent);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.study-table tbody tr {
+  border-bottom: 1px solid var(--border);
+}
+
+.study-table tbody tr:last-child { border-bottom: none; }
+.study-table tbody tr:hover { background: var(--soft); }
+
+.study-table td {
+  padding: 11px 16px;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.study-table td:first-child {
+  font-weight: 600;
+  color: var(--accent);
+  width: 28%;
+}
+
+/* INFO BOX */
+.info-box {
+  display: flex;
+  gap: 14px;
+  background: rgba(107,142,127,0.08);
+  border: 1px solid rgba(107,142,127,0.25);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.info-box .ib-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.info-box .ib-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent3); margin-bottom: 5px; }
+.info-box .ib-body { font-size: 0.88rem; line-height: 1.7; color: var(--text); }
+
+.warn-box {
+  display: flex;
+  gap: 14px;
+  background: rgba(184,84,80,0.07);
+  border: 1px solid rgba(184,84,80,0.2);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.warn-box .ib-title { color: var(--red); }
+
+/* DONE BTN */
+.done-btn {
+  width: 100%;
+  margin-top: 28px;
+  padding: 13px;
+  background: var(--text);
+  color: var(--bg);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.done-btn:hover { opacity: 0.85; }
+
+/* NAV */
+.nav-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.nav-btn {
+  flex: 1;
+  padding: 11px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.87rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--soft); }
+
+/* HOME */
+.home-hero {
+  background: var(--text);
+  color: #faf8f5;
+  border-radius: 16px;
+  padding: 32px 36px;
+  margin-bottom: 32px;
+}
+
+.home-hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.home-hero p {
+  font-size: 0.92rem;
+  color: #c4b8a8;
+  line-height: 1.75;
+  max-width: 540px;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.home-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  cursor: pointer;
+  border-top: 4px solid transparent;
+  transition: all 0.25s;
+  text-align: left;
+}
+
+.home-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.home-card.c1 { border-top-color: #8b5e3c; }
+.home-card.c2 { border-top-color: #c4956a; }
+.home-card.c3 { border-top-color: #6b8e7f; }
+.home-card.c4 { border-top-color: #7c5c8a; }
+.home-card.c5 { border-top-color: #b85450; }
+.home-card.c6 { border-top-color: #4a7c6a; }
+
+.home-card .hc-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 7px; }
+.home-card h3 { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+.home-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+.home-card .hc-done { font-size: 0.8rem; color: var(--green); margin-top: 10px; display: none; }
+.home-card.done .hc-done { display: block; }
+
+.stats {
+  display: flex;
+  gap: 16px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  flex: 1;
+  min-width: 100px;
+  background: var(--soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  text-align: center;
+}
+
+.stat strong {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--accent);
+  display: block;
+}
+
+.stat span { font-size: 0.78rem; color: var(--muted); }
+
+@media (max-width: 768px) {
+  .layout { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; position: static; }
+  .main { padding: 24px 20px; }
+  .fc-grid { grid-template-columns: 1fr; }
+  .home-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-title">📚 Final – Consultoría en Sexualidad</div>
+    <div class="logo-sub">Mariana Menéndez · Unidad 6 · 2024</div>
+  </div>
+  <div class="progress-area">
+    <span class="prog-label" id="prog-txt">0 / 6 secciones</span>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sb-section">Menú</div>
+    <button class="sb-btn active" onclick="show('home')" id="btn-home">
+      <span class="sb-num">🏠</span> Inicio
+    </button>
+
+    <div class="sb-section">Trabajo Práctico Final</div>
+    <button class="sb-btn" onclick="show('s1')" id="btn-s1">
+      <span class="sb-num">1</span> Respuesta 1 – Paradigmas
+    </button>
+    <button class="sb-btn" onclick="show('s2')" id="btn-s2">
+      <span class="sb-num">2</span> Respuesta 2 – Disfunción
+    </button>
+    <button class="sb-btn" onclick="show('s3')" id="btn-s3">
+      <span class="sb-num">3</span> Respuesta 3 – Counseling
+    </button>
+    <button class="sb-btn" onclick="show('s4')" id="btn-s4">
+      <span class="sb-num">4</span> Respuesta 4 – Necesidades
+    </button>
+
+    <div class="sb-section">Repaso Teórico</div>
+    <button class="sb-btn" onclick="show('s5')" id="btn-s5">
+      <span class="sb-num">📖</span> Conceptos clave
+    </button>
+    <button class="sb-btn" onclick="show('s6')" id="btn-s6">
+      <span class="sb-num">🃏</span> Flashcards
+    </button>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- HOME -->
+    <div class="section active" id="home">
+      <div class="home-hero">
+        <h2>Preparate para defender tu parcial 💪</h2>
+        <p>Esta app te muestra tus 4 respuestas <strong>junto con la fundamentación teórica</strong> de cada una, usando los textos de la materia. Estudiá sección por sección y marcá las que ya dominás.</p>
+      </div>
+      <div class="home-grid" id="home-grid">
+        <button class="home-card c1" onclick="show('s1')" id="hc-s1">
+          <div class="hc-label">Pregunta 1</div>
+          <h3>Paradigmas y diversidad</h3>
+          <p>Análisis fenomenológico de la escena de "Poco ortodoxa".</p>
+          <div class="hc-done">✓ Completada</div>
+        </button>
+        <button class="home-card c2" onclick="show('s2')" id="hc-s2">
+          <div class="hc-label">Pregunta 2</div>
+          <h3>¿Hay disfunción sexual?</h3>
+          <p>Análisis con el DSM-5 y la teoría de Kaplan.</p>
+          <div class="hc-done">✓ Completada</div>
+        </button>
+        <button class="home-card c3" onclick="show('s3')" id="hc-s3">
+          <div class="hc-label">Pregunta 3</div>
+          <h3>¿Es consulta para Counseling?</h3>
+          <p>Rol del counselor en sexualidad.</p>
+          <div class="hc-done">✓ Completada</div>
+        </button>
+        <button class="home-card c4" onclick="show('s4')" id="hc-s4">
+          <div class="hc-label">Pregunta 4</div>
+          <h3>4 necesidades de la pareja</h3>
+          <p>Comunicación, erotismo, autoestima y vínculo.</p>
+          <div class="hc-done">✓ Completada</div>
+        </button>
+        <button class="home-card c5" onclick="show('s5')" id="hc-s5">
+          <div class="hc-label">Repaso</div>
+          <h3>Conceptos clave</h3>
+          <p>Tablas de teoría para defender cualquier pregunta.</p>
+          <div class="hc-done">✓ Completada</div>
+        </button>
+        <button class="home-card c6" onclick="show('s6')" id="hc-s6">
+          <div class="hc-label">Práctica</div>
+          <h3>Flashcards</h3>
+          <p>Repaso rápido pregunta/respuesta.</p>
+          <div class="hc-done">✓ Completada</div>
+        </button>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong id="done-count">0</strong><span>Completadas</span></div>
+        <div class="stat"><strong>6</strong><span>Secciones</span></div>
+        <div class="stat"><strong>4</strong><span>Preguntas</span></div>
+        <div class="stat"><strong>📖</strong><span>Textos usados</span></div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 1 -->
+    <div class="section" id="s1">
+      <div class="page-tag">Pregunta 1</div>
+      <h1 class="page-title">Paradigmas y diversidad en "Poco ortodoxa"</h1>
+      <p class="page-intro">Descripción fenomenológica de lo que se observa en el video: cómo aparecen distintos paradigmas sobre el cuerpo, el género y la sexualidad.</p>
+
+      <div class="resp-card">
+        <div class="pregunta">Tu respuesta</div>
+        <h3>Describí fenomenológicamente los paradigmas y la "diversidad" que se muestran en el video.</h3>
+        <div class="respuesta">
+          Podemos observar a Esty, joven judía elegida por la familia de Yanky. Su cuerpo es considerado principalmente como medio para la procreación. Recibe una educación sexual casi nula para ser "buena esposa", lo que genera un conflicto interno entre las enseñanzas de su comunidad y sus deseos personales. El marido debe sentirse como un "Rey" y si no hay embarazo, ella es considerada "defectuosa".<br><br>
+          En las primeras noches ambos se muestran tímidos y avergonzados. Esty menciona que según el Talmud el marido debe asegurar el placer de la esposa, lo que enfurece a Yanky porque a las mujeres les está prohibido leerlo.<br><br>
+          Después de varios intentos con dolor en la penetración, les imponen ejercicios con dilatadores. Casi un año después logran completar el encuentro sexual, siendo Yanky quien llega al orgasmo.
+        </div>
+
+        <div class="teoria-box">
+          <div class="tbox-title">📚 Fundamentación teórica</div>
+          <ul>
+            <li><strong>Paradigma patriarcal / misógino:</strong> Según Yavícoli (cap. "De las hembras y los machos"), históricamente la mujer fue considerada inferior al hombre. Galeno describía los genitales femeninos como una versión "mutilada" de los masculinos; Freud habló de la "envidia del pene". Esto explica por qué en la escena el cuerpo de Esty es un instrumento y no un sujeto de deseo.</li>
+            <li><strong>Educación sexual deficiente y mitos:</strong> La Ficha de Cátedra de Counseling define que los mitos sobre sexualidad generan desinformación y sufrimiento. Esty carece de información real sobre su cuerpo y respuesta sexual.</li>
+            <li><strong>Estereotipos de género y tipificación:</strong> Yavícoli señala que "los códigos unen a las personas, los estereotipos los comprimen". La comunidad impone roles rígidos: él debe ser el activo, ella la pasiva reproductora.</li>
+            <li><strong>Sexo ≠ Intimidad:</strong> Según Matthew Kelly, el sexo no es sinónimo de intimidad. La pareja tiene relaciones sin intimidad emocional ni intelectual real, lo que explica el fracaso erótico.</li>
+            <li><strong>Ausencia de cortejo y etapa precopulatoria:</strong> Para Yavícoli ("Antes de la cama"), gran parte de las fallas eréctiles y de orgasmo se deben a un escaso o nulo juego sexual. La pareja intenta pasar directamente de la no excitación a la penetración.</li>
+          </ul>
+        </div>
+
+        <div class="cita">"Gran parte de las fallas de erección de los trastornos del orgasmo y eyaculación se deben a un escaso o nulo juego sexual de la pareja, que pretende pasar en segundos de la no excitación a la penetración." — Yavícoli, Cap. 9</div>
+
+        <div class="chips">
+          <span class="chip brown">Misoginia histórica</span>
+          <span class="chip red">Paradigma patriarcal</span>
+          <span class="chip teal">Mitos sexuales</span>
+          <span class="chip purple">Sexo ≠ Intimidad</span>
+          <span class="chip brown">Estereotipos de género</span>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="nav-btn" onclick="show('home')">← Inicio</button>
+        <button class="nav-btn" onclick="show('s2')">Pregunta 2 →</button>
+      </div>
+      <button class="done-btn" onclick="markDone('s1',1)">✓ Marcar como repasada</button>
+    </div>
+
+    <!-- SECCIÓN 2 -->
+    <div class="section" id="s2">
+      <div class="page-tag">Pregunta 2</div>
+      <h1 class="page-title">¿Estamos frente a una disfunción sexual?</h1>
+      <p class="page-intro">Análisis crítico: ¿los síntomas de Esty cumplen los criterios de una disfunción según el DSM-5 y la teoría de Kaplan?</p>
+
+      <div class="resp-card">
+        <div class="pregunta">Tu respuesta</div>
+        <h3>¿Creés que estamos frente a una disfunción sexual? ¿Por qué?</h3>
+        <div class="respuesta">
+          No estamos frente a una disfunción sexual, ya que las circunstancias son adversas e inadecuadas. La estimulación sexual es insuficiente en tipo, intensidad y duración. La falta de comunicación, confianza e información crea un ambiente hostil donde la presión y el estrés son constantes. El intento de penetración ocurre de manera repentina sin estimulación previa, lo que lleva a fracasos continuos y sufrimiento físico y emocional.
+        </div>
+
+        <div class="teoria-box">
+          <div class="tbox-title">📚 Fundamentación teórica</div>
+          <ul>
+            <li><strong>DSM-5 (Disfunciones sexuales):</strong> Para diagnosticar una disfunción, los síntomas deben persistir en casi todas las situaciones, causando malestar clínicamente significativo, y no explicarse por factores contextuales, relacionales o educativos. En el caso de Esty, el dolor y la dificultad tienen una causa contextual clara (ignorancia, presión, ausencia de estimulación).</li>
+            <li><strong>Kaplan – Respuesta Sexual Humana:</strong> Kaplan plantea que la excitación es "mitad fricción y mitad fantasía". Sin plataforma de excitación máxima en la mujer, no hay orgasmo. El clítoris necesita vasodilatación y lubricación vaginal (aprox. 30 segundos de estimulación). Nada de esto ocurre en la escena.</li>
+            <li><strong>Inhibición sexual por estrés:</strong> Yavícoli ("El mejor afrodisíaco") explica que el estrés produce inhibición del deseo sexual. El cerebro prioriza el dolor antes que el placer, activando mecanismos de emergencia que suprimen la respuesta erótica.</li>
+            <li><strong>La Ficha de Cátedra (Causas psicológicas de las disfunciones):</strong> Las causas psicológicas incluyen creencias negativas sobre el sexo aprendidas desde la niñez, culpa, vergüenza y presión por el rendimiento. Todo eso está presente en Esty.</li>
+            <li><strong>Amígdala y excitación:</strong> Según la RSH (Respuesta Sexual Humana 2023), durante una relación sexual la amígdala se desactiva. En Esty, dado el contexto de tensión y miedo, esa desactivación nunca ocurre.</li>
+          </ul>
+        </div>
+
+        <div class="warn-box">
+          <div class="ib-icon">⚠️</div>
+          <div>
+            <div class="ib-title">Dato clave para defender esta respuesta</div>
+            <div class="ib-body">El DSM-5 exige que los síntomas <strong>no se expliquen mejor por factores contextuales adversos</strong>. En este caso, el dolor de Esty tiene una explicación directa: ausencia de excitación previa, contexto de coerción y presión. Sin estimulación adecuada, ninguna mujer puede lubricar ni relajar la musculatura pélvica.</div>
+          </div>
+        </div>
+
+        <table class="study-table">
+          <thead><tr><th>Disfunción DSM-5</th><th>¿Aplica?</th><th>Por qué NO en este caso</th></tr></thead>
+          <tbody>
+            <tr><td>Trastorno de dolor genitopélvico</td><td>❌ No diagnóstico</td><td>El dolor responde a falta de excitación y estimulación, no a causa orgánica/psíquica autónoma</td></tr>
+            <tr><td>Trastorno del interés sexual</td><td>❌ No diagnóstico</td><td>No hay evidencia de ausencia de deseo intrínseco; hay ausencia de condiciones para el deseo</td></tr>
+            <tr><td>Trastorno orgásmico femenino</td><td>❌ No diagnóstico</td><td>No se llegó nunca a la fase de meseta necesaria para el orgasmo</td></tr>
+          </tbody>
+        </table>
+
+        <div class="chips">
+          <span class="chip green">No es disfunción</span>
+          <span class="chip brown">Causa contextual</span>
+          <span class="chip teal">Kaplan RSH</span>
+          <span class="chip purple">DSM-5</span>
+          <span class="chip red">Inhibición por estrés</span>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="nav-btn" onclick="show('s1')">← Pregunta 1</button>
+        <button class="nav-btn" onclick="show('s3')">Pregunta 3 →</button>
+      </div>
+      <button class="done-btn" onclick="markDone('s2',2)">✓ Marcar como repasada</button>
+    </div>
+
+    <!-- SECCIÓN 3 -->
+    <div class="section" id="s3">
+      <div class="page-tag">Pregunta 3</div>
+      <h1 class="page-title">¿Es una consulta para Counseling?</h1>
+      <p class="page-intro">Fundamentación del rol del counselor en sexualidad a partir de la Ficha de Cátedra y los textos de la Unidad 1 y 6.</p>
+
+      <div class="resp-card">
+        <div class="pregunta">Tu respuesta</div>
+        <h3>¿Considerás que ésta podría ser una consulta para Counseling? Fundamentar.</h3>
+        <div class="respuesta">
+          Sí. Generando un espacio de confianza, el counselor puede proporcionar información sobre autoconocimiento y desarrollo de la sexualidad, revisar creencias, y crear un lugar donde ambos puedan expresar necesidades, preocupaciones y límites de manera respetuosa. Se puede recibir a la pareja para que compartan sus experiencias conflictivas en su desempeño sexual y exploren conductas integrando la emocionalidad.
+        </div>
+
+        <div class="teoria-box">
+          <div class="tbox-title">📚 Fundamentación teórica</div>
+          <ul>
+            <li><strong>Definición de Counseling en Sexualidad (Ficha de Cátedra U1):</strong> Es un proceso de ayuda que abarca prevención, cambio y mejor funcionamiento sexual, promoviendo el crecimiento y despliegue de la capacidad sexual. El caso de Esty encaja perfectamente: no hay patología, hay necesidad de acompañamiento y educación.</li>
+            <li><strong>Funciones de la Sexualidad (Kuznetsoff):</strong> La sexualidad cumple funciones de reproducción, placer, autoestima e intimidad. En la pareja, solo funciona la reproductiva (y mal). El counselor trabaja para integrar las cuatro dimensiones.</li>
+            <li><strong>Rol del Counselor en Sexualidad (U6):</strong> El texto específico de la materia señala que el counselor no es terapeuta sexual pero sí puede acompañar procesos de información, exploración de creencias y mejora de la comunicación de la pareja.</li>
+            <li><strong>Gómez Di Leva – Mal educados sexuales:</strong> Una sexualidad inteligente se basa en información, creatividad y flexibilidad. El counselor puede aportar precisamente esos tres pilares al caso de Esty y Yanky.</li>
+            <li><strong>Matthew Kelly – Sexo no es intimidad:</strong> La intimidad es multidimensional (física, emocional, intelectual, espiritual). El counselor puede guiar el proceso de construir intimidad real, no solo copulación.</li>
+            <li><strong>Límites del Counseling:</strong> Si se detecta una disfunción real o una causa orgánica, el counselor deriva. Aquí no es el caso: se trata de educación, comunicación y revisión de creencias religiosas/culturales.</li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <div class="ib-icon">💡</div>
+          <div>
+            <div class="ib-title">Concepto clave para mencionar en el oral</div>
+            <div class="ib-body">El Counseling en Sexualidad actúa en <strong>prevención y promoción</strong>, no solo en patología. Esty y Yanky no tienen un trastorno: tienen una educación sexual nula y creencias que bloquean su erotismo. Ese es justamente el terreno del counselor.</div>
+          </div>
+        </div>
+
+        <div class="chips">
+          <span class="chip brown">Counseling en Sexualidad</span>
+          <span class="chip teal">Prevención y promoción</span>
+          <span class="chip purple">Intimidad multidimensional</span>
+          <span class="chip green">Educación sexual</span>
+          <span class="chip brown">Revisión de creencias</span>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="nav-btn" onclick="show('s2')">← Pregunta 2</button>
+        <button class="nav-btn" onclick="show('s4')">Pregunta 4 →</button>
+      </div>
+      <button class="done-btn" onclick="markDone('s3',3)">✓ Marcar como repasada</button>
+    </div>
+
+    <!-- SECCIÓN 4 -->
+    <div class="section" id="s4">
+      <div class="page-tag">Pregunta 4</div>
+      <h1 class="page-title">4 Necesidades de la pareja</h1>
+      <p class="page-intro">Identificación y fundamentación teórica de las necesidades de ayuda de Esty y Yanky.</p>
+
+      <div class="resp-card">
+        <div class="pregunta">Tu respuesta (expandida con teoría)</div>
+        <h3>Nombrar al menos 4 necesidades (de ayuda) de esta pareja.</h3>
+
+        <div class="sh" style="margin-top:0">Necesidad 1 – Comunicación</div>
+        <div class="respuesta" style="margin-bottom:10px">Acompañamiento para que puedan expresar sus necesidades y límites de manera respetuosa y efectiva.</div>
+        <div class="teoria-box">
+          <div class="tbox-title">📚 Teoría</div>
+          <ul>
+            <li><strong>Miller y Laut ("Amor, sexo y comunicación"):</strong> "Pedir lo que querés te hace vulnerable, pero es necesario." La pareja necesita aprender a pedir de forma clara y directa, sin esperar que el otro adivine.</li>
+            <li><strong>Plan de 14 puntos (Técnicas de comunicación):</strong> Incluye discutir un solo tema a la vez, conceder la palabra sin interrupciones, pedir descanso cuando la intensidad sea incómoda.</li>
+            <li><strong>Yavícoli:</strong> "Aprender a pedir lo que uno necesita. Aprender que cuando uno pide el otro puede negarse." La comunicación erótica es una habilidad que se aprende.</li>
+          </ul>
+        </div>
+
+        <div class="sh">Necesidad 2 – Desarrollo del erotismo</div>
+        <div class="respuesta" style="margin-bottom:10px">Acompañamiento para el desarrollo y despliegue del erotismo personal y de la pareja para un funcionamiento sexual pleno.</div>
+        <div class="teoria-box">
+          <div class="tbox-title">📚 Teoría</div>
+          <ul>
+            <li><strong>Kaplan (RSH):</strong> Sin plataforma de excitación máxima en la mujer no hay orgasmo. El erotismo necesita tiempo, estimulación y fantasía. "El cerebro es el principal órgano sexual."</li>
+            <li><strong>Yavícoli, cap. 16:</strong> "El mejor afrodisíaco está en su cerebro y la habilidad está en su piel, su erotismo." Necesitan explorar qué les resulta placentero y qué no.</li>
+            <li><strong>Cortejo (SASH):</strong> El cortejo es "el combustible que alimenta el deseo". La pareja no tiene cortejo ni etapa precopulatoria. Deben construirla.</li>
+          </ul>
+        </div>
+
+        <div class="sh">Necesidad 3 – Autoestima y autoconocimiento</div>
+        <div class="respuesta" style="margin-bottom:10px">Acompañamiento para mejorar la autoestima y el autoconocimiento en relación con la identidad y el rol dentro de su comunidad.</div>
+        <div class="teoria-box">
+          <div class="tbox-title">📚 Teoría</div>
+          <ul>
+            <li><strong>Matthew Kelly – Sexo no es intimidad:</strong> "La madurez sobreviene cuando aprendemos a querer a nuestro ser. Preferimos ser rechazados por ser quienes realmente somos que amados por simular ser quienes no somos." Esty simula todo el tiempo quien no es.</li>
+            <li><strong>Caldiz y Resnicoff (Autoestima, amor e intimidad):</strong> La autoestima es la base de una sexualidad plena. El "yo defectuosa" que siente Esty destruye cualquier posibilidad de disfrute.</li>
+            <li><strong>Gómez Di Leva – Mal educados:</strong> "Cambiar una idea puede cambiar completamente tu sexualidad." Esty necesita revisar las creencias sobre su cuerpo y su valor como persona.</li>
+          </ul>
+        </div>
+
+        <div class="sh">Necesidad 4 – Vínculo emocional e intimidad</div>
+        <div class="respuesta" style="margin-bottom:10px">Acompañamiento para generar la conexión con los sentimientos amorosos y el intercambio de placer.</div>
+        <div class="teoria-box">
+          <div class="tbox-title">📚 Teoría</div>
+          <ul>
+            <li><strong>Sternberg (Triángulo del amor, citado en SASH):</strong> Una relación necesita intimidad + pasión + compromiso. La pareja solo tiene compromiso (por mandato religioso). Faltan los otros dos vértices.</li>
+            <li><strong>Matthew Kelly:</strong> "La intimidad es la autorrevelación mutua. Dos personas que constantemente se descubren y redescubren la una a la otra." Esty y Yanky se desconocen profundamente.</li>
+            <li><strong>Ficha de Cátedra:</strong> La sexualidad integra funciones de placer, autoestima e intimidad. El counselor puede acompañar la construcción de ese vínculo desde cero.</li>
+          </ul>
+        </div>
+
+        <div class="chips">
+          <span class="chip brown">Comunicación</span>
+          <span class="chip teal">Erotismo</span>
+          <span class="chip purple">Autoestima</span>
+          <span class="chip green">Intimidad</span>
+          <span class="chip brown">Sternberg</span>
+          <span class="chip red">Autoconocimiento</span>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="nav-btn" onclick="show('s3')">← Pregunta 3</button>
+        <button class="nav-btn" onclick="show('s5')">Conceptos clave →</button>
+      </div>
+      <button class="done-btn" onclick="markDone('s4',4)">✓ Marcar como repasada</button>
+    </div>
+
+    <!-- SECCIÓN 5 – CONCEPTOS CLAVE -->
+    <div class="section" id="s5">
+      <div class="page-tag">Repaso</div>
+      <h1 class="page-title">Conceptos clave para el oral</h1>
+      <p class="page-intro">Tablas rápidas con los conceptos más importantes que podés necesitar defender en el oral. Sin omisiones.</p>
+
+      <div class="sh">Respuesta Sexual Humana (Kaplan + Masters & Johnson)</div>
+      <table class="study-table">
+        <thead><tr><th>Fase</th><th>Qué ocurre</th><th>Dato clave</th></tr></thead>
+        <tbody>
+          <tr><td>Deseo</td><td>Motivación erótica. En la mujer parte de un estado neutro o predisposición (Basson)</td><td>Varón: lineal. Mujer: circular/cíclica</td></tr>
+          <tr><td>Excitación</td><td>Vasocongestión genital. Lubricación vaginal (~30 seg). Erección del clítoris y pene</td><td>Sin excitación máxima, no hay orgasmo en la mujer</td></tr>
+          <tr><td>Meseta</td><td>Mantenimiento de la excitación. Se puede interrumpir voluntariamente</td><td>El clítoris se retrae; pene aumenta de tamaño</td></tr>
+          <tr><td>Orgasmo</td><td>Contracciones musculares rítmicas. "Le petit mort". Endorfinas, oxitocina, dopamina</td><td>La mujer puede tener orgasmos múltiples</td></tr>
+          <tr><td>Resolución</td><td>Retorno a la normalidad. Sudoración proporcional al orgasmo</td><td>El placer no lo da solo el orgasmo</td></tr>
+        </tbody>
+      </table>
+
+      <div class="sh">Cortejo (SASH – Rinaldi y Díaz)</div>
+      <table class="study-table">
+        <thead><tr><th>Tipo</th><th>Definición</th></tr></thead>
+        <tbody>
+          <tr><td>Cortejo primario</td><td>Sentirse deseado/a por primera vez. Etapa de atracción inicial</td></tr>
+          <tr><td>Cortejo secundario</td><td>Ya hay compromiso emocional estable. Mantener el deseo a lo largo del tiempo</td></tr>
+          <tr><td>Triángulo de Sternberg</td><td>Intimidad + Pasión + Compromiso. Una relación con un solo elemento es frágil</td></tr>
+        </tbody>
+      </table>
+
+      <div class="sh">Disfunciones Sexuales (DSM-5)</div>
+      <table class="study-table">
+        <thead><tr><th>Criterio</th><th>Requisito para diagnóstico</th></tr></thead>
+        <tbody>
+          <tr><td>Duración</td><td>Mínimo 6 meses en casi todas las ocasiones (75-100%)</td></tr>
+          <tr><td>Malestar</td><td>Clínicamente significativo para la persona</td></tr>
+          <tr><td>Exclusión</td><td>No explicado por factores contextuales, relacionales, culturales, ni sustancias</td></tr>
+          <tr><td>Causas psicológicas (Ficha)</td><td>Culpa, vergüenza, creencias negativas, presión por rendimiento, mitos</td></tr>
+        </tbody>
+      </table>
+
+      <div class="sh">Counseling en Sexualidad (Ficha U1)</div>
+      <table class="study-table">
+        <thead><tr><th>Aspecto</th><th>Contenido</th></tr></thead>
+        <tbody>
+          <tr><td>Definición</td><td>Proceso de ayuda que abarca prevención, cambio y mejor funcionamiento sexual</td></tr>
+          <tr><td>Funciones sexualidad</td><td>Reproducción · Placer · Autoestima · Intimidad (Kuznetsoff)</td></tr>
+          <tr><td>Sexualidad inteligente</td><td>Información + Creatividad + Flexibilidad (Gómez Di Leva)</td></tr>
+          <tr><td>7 niveles de intimidad</td><td>Físico · Emocional · Intelectual · Espiritual (Kelly)</td></tr>
+          <tr><td>Mitos</td><td>Generan desinformación y sufrimiento; el counselor los trabaja</td></tr>
+        </tbody>
+      </table>
+
+      <div class="sh">Identidad y Género (Glosario)</div>
+      <table class="study-table">
+        <thead><tr><th>Concepto</th><th>Definición</th></tr></thead>
+        <tbody>
+          <tr><td>Sexo biológico</td><td>Diferencias genéticas, físicas, anatómicas y fisiológicas</td></tr>
+          <tr><td>Género</td><td>Construcción cultural de lo que significa ser varón/mujer en una cultura</td></tr>
+          <tr><td>Identidad de género</td><td>Sentimiento y certeza de ser varón o mujer, más allá del cuerpo</td></tr>
+          <tr><td>Rol de género</td><td>Cómo expresa públicamente su identidad (vestimenta, actitudes)</td></tr>
+          <tr><td>Orientación sexual</td><td>Hacia quién se dirige el deseo: hetero, homo, bi</td></tr>
+          <tr><td>CIS</td><td>Persona cuya identidad de género coincide con su sexo asignado al nacer</td></tr>
+          <tr><td>Trans</td><td>Persona que transita de un género a otro. No se identifica con su sexo biológico</td></tr>
+        </tbody>
+      </table>
+
+      <div class="nav-row">
+        <button class="nav-btn" onclick="show('s4')">← Pregunta 4</button>
+        <button class="nav-btn" onclick="show('s6')">Flashcards →</button>
+      </div>
+      <button class="done-btn" onclick="markDone('s5',5)">✓ Marcar como repasada</button>
+    </div>
+
+    <!-- SECCIÓN 6 – FLASHCARDS -->
+    <div class="section" id="s6">
+      <div class="page-tag">Práctica</div>
+      <h1 class="page-title">Flashcards – Repaso rápido</h1>
+      <p class="page-intro">Hacé clic en cada tarjeta para ver la respuesta. Ideal para repasar el día del examen.</p>
+
+      <div class="fc-grid">
+
+        <div class="fc-wrap" onclick="flip('fc1')">
+          <div class="fc" id="fc1">
+            <div class="fc-face fc-front">
+              <div class="fc-q">¿Por qué el dolor de Esty NO es una disfunción sexual?</div>
+              <div class="fc-hint">tocá para ver ↩</div>
+            </div>
+            <div class="fc-face fc-back">
+              <div class="fc-a">Porque tiene una causa contextual clara: ausencia de estimulación previa, presión cultural y mitos. El DSM-5 excluye del diagnóstico lo que se explica por factores contextuales.</div>
+              <div class="fc-src">DSM-5 + Kaplan RSH</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fc-wrap" onclick="flip('fc2')">
+          <div class="fc" id="fc2">
+            <div class="fc-face fc-front">
+              <div class="fc-q">¿Qué es el modelo circular de Basson?</div>
+              <div class="fc-hint">tocá para ver ↩</div>
+            </div>
+            <div class="fc-face fc-back">
+              <div class="fc-a">La mujer parte de un estado neutro o predisposición. Con estimulación adecuada aparece la excitación subjetiva. El deseo puede ser consecuencia (no causa) de la estimulación. Rompe el paradigma lineal.</div>
+              <div class="fc-src">Rosemary Basson, año 2000</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fc-wrap" onclick="flip('fc3')">
+          <div class="fc" id="fc3">
+            <div class="fc-face fc-front">
+              <div class="fc-q">¿Cuáles son los 3 pilares de la "sexualidad inteligente" según Gómez Di Leva?</div>
+              <div class="fc-hint">tocá para ver ↩</div>
+            </div>
+            <div class="fc-face fc-back">
+              <div class="fc-a">1. Información 2. Creatividad 3. Flexibilidad. "Cambiar una idea puede cambiar completamente tu sexualidad."</div>
+              <div class="fc-src">Gómez Di Leva – Mal educados sexuales</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fc-wrap" onclick="flip('fc4')">
+          <div class="fc" id="fc4">
+            <div class="fc-face fc-front">
+              <div class="fc-q">¿Por qué el sexo no es igual a intimidad?</div>
+              <div class="fc-hint">tocá para ver ↩</div>
+            </div>
+            <div class="fc-face fc-back">
+              <div class="fc-a">Porque la intimidad es multidimensional: física, emocional, intelectual y espiritual. El sexo puede ocurrir sin ninguna de esas capas. La intimidad real es la autorrevelación mutua.</div>
+              <div class="fc-src">Matthew Kelly – Sexo no es intimidad</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fc-wrap" onclick="flip('fc5')">
+          <div class="fc" id="fc5">
+            <div class="fc-face fc-front">
+              <div class="fc-q">¿Cuáles son las 4 funciones de la sexualidad según Kuznetsoff?</div>
+              <div class="fc-hint">tocá para ver ↩</div>
+            </div>
+            <div class="fc-face fc-back">
+              <div class="fc-a">1. Reproducción 2. Placer 3. Autoestima 4. Intimidad. En el caso de Esty y Yanky, solo funciona (parcialmente) la reproductiva.</div>
+              <div class="fc-src">Ficha de Cátedra U1 – Counseling en Sexualidad</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fc-wrap" onclick="flip('fc6')">
+          <div class="fc" id="fc6">
+            <div class="fc-face fc-front">
+              <div class="fc-q">¿Qué es el cortejo secundario?</div>
+              <div class="fc-hint">tocá para ver ↩</div>
+            </div>
+            <div class="fc-face fc-back">
+              <div class="fc-a">Cuando ya hay un compromiso emocional estable y hay que seguir manteniendo el deseo. Es el combustible que alimenta la relación a lo largo del tiempo. Esty y Yanky nunca llegaron ni al cortejo primario.</div>
+              <div class="fc-src">SASH – El cortejo, Cap. 4</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fc-wrap" onclick="flip('fc7')">
+          <div class="fc" id="fc7">
+            <div class="fc-face fc-front">
+              <div class="fc-q">¿Qué hormona se libera durante el orgasmo y qué función cumple en cada sexo?</div>
+              <div class="fc-hint">tocá para ver ↩</div>
+            </div>
+            <div class="fc-face fc-back">
+              <div class="fc-a">Oxitocina: en mujeres genera contracciones uterinas; en varones es "la hormona del amor" que promueve empatía y vínculo. También se liberan endorfinas (placer, inhibición del dolor) y dopamina (recompensa).</div>
+              <div class="fc-src">Kaplan – RSH / Ficha de hormonas</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fc-wrap" onclick="flip('fc8')">
+          <div class="fc" id="fc8">
+            <div class="fc-face fc-front">
+              <div class="fc-q">¿Por qué el Counseling (y no la terapia sexual) es adecuado para esta pareja?</div>
+              <div class="fc-hint">tocá para ver ↩</div>
+            </div>
+            <div class="fc-face fc-back">
+              <div class="fc-a">Porque no hay una disfunción clínica: hay falta de educación, creencias restrictivas y ausencia de comunicación. El counseling actúa en prevención, información y acompañamiento, sin patologizar. Si hubiera disfunción orgánica o psíquica real, se derivaría.</div>
+              <div class="fc-src">Ficha U1 + Rol del Counselor U6</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="nav-row">
+        <button class="nav-btn" onclick="show('s5')">← Conceptos clave</button>
+        <button class="nav-btn" onclick="show('home')" style="background:var(--soft);">🏠 Inicio</button>
+      </div>
+      <button class="done-btn" onclick="markDone('s6',6)">✓ Marcar como repasada</button>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const done = new Set();
+const total = 6;
+
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sb-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const btn = document.getElementById('btn-' + id);
+  if (btn) btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function markDone(sectionId, num) {
+  done.add(sectionId);
+  const btn = document.getElementById('btn-' + sectionId);
+  if (btn) btn.classList.add('done');
+  const hc = document.getElementById('hc-' + sectionId);
+  if (hc) hc.classList.add('done');
+  document.getElementById('done-count').textContent = done.size;
+  const pct = (done.size / total) * 100;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-txt').textContent = done.size + ' / ' + total + ' secciones';
+  const db = document.querySelector('#' + sectionId + ' .done-btn');
+  if (db) { db.textContent = '✓ ¡Repasada!'; db.style.opacity = '0.55'; db.style.cursor = 'default'; }
+}
+
+function flip(id) {
+  document.getElementById(id).classList.toggle('flipped');
+}
+</script>
+</body>
+</html>
